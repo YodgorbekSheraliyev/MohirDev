@@ -1,3 +1,4 @@
+//15
 const arr = [1, 5, 6, 888, 91, 12];
 const findSecondGreat = function (array) {
     const newArr = structuredClone(array)

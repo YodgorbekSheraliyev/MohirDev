@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+     <header class="header">
+        <nav class="header-nav">
+            <ul class="header-item-list">
+                <li class="header-item"><a href="/">Bosh Sahifa</a></li>
+                <li class="header-item"><a href="/add-user">Add users</a></li>
+            </ul>
+        </nav>
+    </header>
+    <main>
+        <h1>Users list</h1>
+        {{#if users}}
+        {{#each users}}
+        <div class="crad">
+            <img src="https://www.w3schools.com/howto/img_avatar.png" >
+            <div class="container">
+                <h4><b>Name: {{username}}</b></h4>
+                <p>Age: {{age}} </p>
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <p>Userlarni barcha listi... </p>
+        {{/if}}
+    </main>
+</body>
+</html>

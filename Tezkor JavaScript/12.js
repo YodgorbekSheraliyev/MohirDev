@@ -1,3 +1,4 @@
+//12
 const n = 2;
 const array = [2,4,6,4];
 

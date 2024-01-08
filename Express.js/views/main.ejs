@@ -1,0 +1,21 @@
+<%-include('includes/head.ejs')%>
+<body>
+  <%-include('includes/navbar.ejs')%>
+  <main>
+    <h1>Users list</h1>
+    <% if (users.length > 0) { %> <% users.forEach(u =>{ %>
+    <div class="crad">
+      <img src="https://www.w3schools.com/howto/img_avatar.png" />
+      <div class="container">
+        <h4>
+          <b>Name: <%= u.username%></b>
+        </h4>
+        <p>Age: <%= u.age%></p>
+      </div>
+    </div> 
+    <%}) %> <% } else { %>
+    <p>Userlarni barcha listi...</p>
+    <% } %>
+  </main>
+  <%-include('includes/foot.ejs')%>
+</body>

@@ -1,0 +1,17 @@
+<main>
+        <h1>Users list</h1>
+        {{#if user}}
+        <div class="card">
+            <img src="https://www.w3schools.com/howto/img_avatar.png" >
+            <div class="container">
+                <h4><b>Name: {{user.username}}</b></h4>
+                <p>Age: {{user.age}} </p>
+                <form action="/user/delete/{{user.id}}" method="POST">
+                <button type="submit" class="btn">Delete</button>
+                </form>
+            </div>
+        </div>
+        {{else}}
+        <p>Userlarni barcha listi... </p>
+        {{/if}}
+    </main>

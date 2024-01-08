@@ -1,0 +1,18 @@
+doctype html
+html(lang="en")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport" content="width=device-width, initial-scale=1.0")
+        //- link(rel="stylesheet", href="/css/add-users.css")
+        //- link(rel="stylesheet", href="/css/main.css")
+        block style
+        title #{title}
+    body 
+        header.header 
+            nav.header-nav
+                ul.header-item-list 
+                    li.header-item 
+                        a(href='/') Bosh sahifa
+                    li.header-item 
+                        a(href='/user/add-user') Add user
+        block content

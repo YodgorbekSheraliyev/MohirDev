@@ -1,0 +1,14 @@
+<main>
+  <h1>Add user</h1>
+  <form class="user-form" action="/user/edit/{{user.id}}" method="POST">
+    <div class="form-control">
+      <label for="username">Username</label>
+      <input type="text" name="username" value="{{user.username}}"/>
+    </div>
+    <div class="form-control">
+      <label for="age">Age</label>
+      <input type="number" name="age" value="{{user.age}}" />
+    </div>
+    <button type="submit">Send</button>
+  </form>
+</main>

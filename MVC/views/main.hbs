@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{title}}</title>
+    <link rel="stylesheet" href="/css/main.css">
+</head>
+<body>
+     
+    <main>
+        <h1>Users list</h1>
+        {{#if users}}
+        {{#each users}}
+        <div class="card">
+            <img src="https://www.w3schools.com/howto/img_avatar.png" >
+            <div class="container">
+                <h4><b>Name: {{username}}</b></h4>
+                <p>Age: {{age}} </p>
+                <a href="/{{uid}}" class="btn"> More info...</a>
+            </div>
+        </div>
+        {{/each}}
+        {{else}}
+        <p>Userlarni barcha listi... </p>
+        {{/if}}
+    </main>
+</body>
+</html>

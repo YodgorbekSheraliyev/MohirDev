@@ -1,0 +1,16 @@
+extends layouts/main-layout.pug
+
+block style
+    link(rel="stylesheet" href="/css/add-users.css")
+    
+block content
+    main    
+        h1 Add user
+        form.user-form(action="/user/users" method="POST")
+            div.form-control
+                label( for="username") Username
+                input( type="text" name="username")
+            div.form-control
+                label( for="age") Age
+                input(type='number' name='age')
+                button(type='submit') Send    

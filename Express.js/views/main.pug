@@ -1,0 +1,19 @@
+extends layouts/main-layout.pug
+
+block style
+  link(rel="stylesheet" href="/css/main.css")
+
+block content
+  main 
+    h1 Users list
+    if users.length > 0
+      div.card-wrapper 
+        each user in users 
+          div.card 
+            img(src='https://www.w3schools.com/howto/img_avatar.png' alt='Avatar')
+            div.container
+              h4
+                b  #{user.username}
+              p Age: #{user.age}
+        else  
+          p There is no user
