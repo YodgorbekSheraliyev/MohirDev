@@ -1,0 +1,51 @@
+<div class="container">
+    <div class="row">
+        <div class="col-mod-6 offset">
+            <div class="card mt-3">
+                <div class="card-body">
+                    <form action="/diary/add" method="post" enctype="application/x-www-form-urlencoded">
+                        <div class="mb-3">
+                            <label for="formFile" class="form-label">Image Url</label>
+                            <input type='text' class="form-control" name="imageUrl" id="formFile">
+                        </div>
+                        <div class="mb-3">
+                            <label for="textarea" class="form-label">Nima haqida yozamiz</label>
+                            <textarea class="form-control" id="textarea"  name="text" rows="4"></textarea>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Submit</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-mod-6 ">
+            {{#if diaries}}
+            {{#each diaries}}
+               <div class="card mb-5 mt-5">
+                   <div class="card-body">
+                       <div class="list-group mb-1">
+                           <a href="#" class="list-group-item list-group-item-action">
+                               <img src="{{imageUrl}}" alt="text">
+                               <h5 class="card-title">Username</h5>
+                           </a>
+                       </div>
+                       <p class="card-text">{{text}}</p>
+                       <p class="card-text">{{createdAt}}</p>
+                   </div>
+                   <div class="card-footer">
+                    <a href="/diary/{{id}}" type="button" class="btn btn-primary">Open</a>
+                    <a href="/diary/update/{{id}}" type="button" class="btn btn-secondary">Update</a>
+                    <form action="/diary/delete/{{id}}" method="post">
+                      <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                   </div>
+               </div> 
+               {{/each}}           
+            {{else}}
+                 <p>No diary added yet...</p>
+            {{/if}}
+            
+        </div>
+    </div>
+</div>
