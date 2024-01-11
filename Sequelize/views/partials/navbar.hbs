@@ -1,20 +1,33 @@
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
   <div class="container-fluid">
     <a href="#" class="navbar-brand">DiaryBook</a>
-    <button type="button" class="navbar-toggler" data-bs-toggle="collapse"  >
+    <button type="button" class="navbar-toggler" data-bs-toggle="collapse">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item">
-          <a href="/diary/my" class="nav-link active" aria-current="page">My Diaries</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">Lenta</a>
-        </li>
-        <li class="nav-item">
-          <a href="#" class="nav-link">My profile</a>
-        </li>
+        {{#if isAuthenticated}}
+          <li class="nav-item">
+            <a href="/diary/my" class="nav-link active" aria-current="page">My
+              Diaries</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">Lenta</a>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">My profile</a>
+          </li>
+          <li class="nav-item">
+            <a href="/auth/logout" class="nav-link">Logout</a>
+          </li>
+        {{else}}
+          <li class="nav-item">
+            <a href="/auth/login" class="nav-link">Login</a>
+          </li>
+          <li class="nav-item">
+            <a href="/auth/registration" class="nav-link">Register</a>
+          </li>
+        {{/if}}
       </ul>
     </div>
   </div>

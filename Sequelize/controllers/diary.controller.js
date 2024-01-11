@@ -1,20 +1,21 @@
-const db = require('../models/index');
+const db = require("../models/index");
 const Diary = db.diary;
-const Comment = db.comment
+const Comment = db.comment;
 
 //Desc   get all my diaries page
 //Route  GET /diary/my
 //Access private
 const getMyDiary = async (req, res) => {
-    try {
-        const diaries = await Diary.findAll({raw: true, include: ['comment'], nest: true})
-        res.render("diary/my-diary", {
-            title: 'My diary',
-            diaries
-        });
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const diaries = await Diary.findAll({ raw: true });
+    res.render("diary/my-diary", {
+      title: "My diary",
+      diaries: diaries.reverse(),
+      isAuthenticated: req.session.isLogged
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //Desc   create  diary
@@ -22,12 +23,12 @@ const getMyDiary = async (req, res) => {
 //Access private
 const addNewDiary = async (req, res) => {
   try {
-    const {imageUrl, text} = req.body;
+    const { imageUrl, text } = req.body;
     await Diary.create({
-        imageUrl: imageUrl,
-        text: text
-    })
-    res.redirect('/diary/my')
+      imageUrl: imageUrl,
+      text: text,
+    });
+    res.redirect("/diary/my");
   } catch (error) {
     console.log(error);
   }
@@ -37,72 +38,80 @@ const addNewDiary = async (req, res) => {
 //Route  GET /diary/:id
 //Access private
 const getDiaryById = async (req, res) => {
-    try {
-        const diary = await Diary.findByPk(req.params.id, {
-            raw: true
-        })
-        res.render("diary/one-diary", {
-            title: 'Diary',
-            diaries: diary
-        });
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const data = await Diary.findByPk(req.params.id, {
+      raw: true,
+      plain: true, 
+      include: ["comment"],
+      nest: true,
+    });
+    const diary = await data.toJSON();
+    res.render("diary/one-diary", {
+      title: "Diary",
+      diaries: diary.reverse(),
+      comments: diary.comment.reverse()
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //Desc   update diary
 //Route  GET /diary/update/:id
 //Access private
 const updateDiaryPage = async (req, res) => {
-    try {
-        const diary = await Diary.findByPk(req.params.id, {raw: true})
-        res.render("diary/update-diary", {
-            title: 'update diary',
-            diary
-        });
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    const diary = await Diary.findByPk(req.params.id, { raw: true });
+    res.render("diary/update-diary", {
+      title: "update diary",
+      diary,
+    });
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //Desc   update diary
 //Route  POST /diary/update/:id
 //Access private
 const updateDiary = async (req, res) => {
-    try {
-       await Diary.update({text: req.body.text}, {where: {id: req.params.id}})
-       res.redirect('/diary/my')
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    await Diary.update(
+      { text: req.body.text },
+      { where: { id: req.params.id } }
+    );
+    res.redirect("/diary/my");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //Desc   delete diary
 //Route  POST /diary/delete/:id
 //Access private
 const deleteDiary = async (req, res) => {
-    try {
-       await Diary.destroy({where: {id: req.params.id}})
-       res.redirect('/diary/my')
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    await Diary.destroy({ where: { id: req.params.id } });
+    res.redirect("/diary/my");
+  } catch (error) {
+    console.log(error);
+  }
 };
 
 //Desc   add comment
 //Route  POST /diary/comment/:id
 //Access private
 const addCommentToDiary = async (req, res) => {
-    try {
-       await Comment.create({
-        name: 'Username',
-        comment: req.body.comment,
-        diaryId: req.params.id
-       })
-       res.redirect('/diary/'+ req.params.id)
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    await Comment.create({
+      name: "Username",
+      comment: req.body.comment,
+      diaryId: req.params.id,
+    });
+    res.redirect("/diary/" + req.params.id);
+  } catch (error) {
+    console.log(error);
+  }
 };
 module.exports = {
   getMyDiary,
@@ -111,5 +120,5 @@ module.exports = {
   updateDiaryPage,
   updateDiary,
   deleteDiary,
-  addCommentToDiary
+  addCommentToDiary,
 };

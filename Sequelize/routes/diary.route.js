@@ -6,17 +6,18 @@ const {
   updateDiaryPage,
   updateDiary,
   deleteDiary,
-  addCommentToDiary
+  addCommentToDiary,
 } = require("../controllers/diary.controller");
 const router = Router();
+const { protected } = require("../middlewares/auth");
 
-router.get("/my", getMyDiary);
-router.get("/:id", getDiaryById);
-router.get("/update/:id", updateDiaryPage);
+router.get("/my", protected, getMyDiary);
+router.get("/update/:id", protected, updateDiaryPage);
+router.get("/:id", protected, getDiaryById);
 
-router.post("/update/:id", updateDiary);
-router.post("/delete/:id", deleteDiary);
-router.post("/comment/:id", addCommentToDiary);
-router.post("/add", addNewDiary);
+router.post("/update/:id", protected, updateDiary);
+router.post("/delete/:id", protected, deleteDiary);
+router.post("/comment/:id", protected, addCommentToDiary);
+router.post("/add", protected, addNewDiary);
 
 module.exports = router;
