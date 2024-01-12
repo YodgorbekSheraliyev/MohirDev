@@ -19,7 +19,7 @@ app.use(
       pool: pool,
       tableName: "user_session",
     }),
-    secret: "my secretvalue",
+    secret: "my secret value",
     resave: false,
     saveUninitialized: false,
   })
@@ -32,6 +32,7 @@ app.set("view engine", ".hbs");
 // Initialize routes
 app.use("/diary", require("./routes/diary.route"));
 app.use("/auth", require("./routes/auth.route"));
+app.use('/user', require('./routes/user.route'))
 
 const PORT = process.env.PORT || 4000;
 

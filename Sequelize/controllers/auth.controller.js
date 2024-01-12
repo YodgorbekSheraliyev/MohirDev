@@ -7,10 +7,10 @@ const User = db.user;
 //Access public
 const getLoginPage = async (req, res) => {
   try {
-    const cookie = req.session.isLogged;
+    const isAuthenticated = req.session.isLogged;
     res.render("auth/login", {
       title: "Login",
-      isAuthenticated: cookie,
+      isAuthenticated: isAuthenticated,
     });
   } catch (error) {
     console.log(error);

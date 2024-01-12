@@ -5,12 +5,12 @@
         <div class="card-body">
           <div class="list-group mb-1">
             <a href="#" class="list-group-item list-group-item-action">
-              <img src="{{diaries.imageUrl}}" alt="text" />
-              <h5 class="card-title">Username</h5>
+              <img src="{{diary.imageUrl}}" alt="text" />
+              <h5 class="card-title">{{diary.user.name}}</h5>
             </a>
           </div>
-          <p class="card-text">{{diaries.text}}</p>
-          <p class="card-text">{{diaries.createdAt}}</p>
+          <p class="card-text">{{diary.text}}</p>
+          <p class="card-text">{{diary.createdAt}}</p>
         </div>
       </div>
     </div>

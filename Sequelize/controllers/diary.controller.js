@@ -7,11 +7,16 @@ const Comment = db.comment;
 //Access private
 const getMyDiary = async (req, res) => {
   try {
-    const diaries = await Diary.findAll({ raw: true });
+    const diaries = await Diary.findAll({
+      raw: true,
+      plain: false,
+      include: ["user"],
+      nest: true,
+    });
     res.render("diary/my-diary", {
       title: "My diary",
       diaries: diaries.reverse(),
-      isAuthenticated: req.session.isLogged
+      isAuthenticated: req.session.isLogged,
     });
   } catch (error) {
     console.log(error);
@@ -27,6 +32,7 @@ const addNewDiary = async (req, res) => {
     await Diary.create({
       imageUrl: imageUrl,
       text: text,
+      userId: req.session.user.id,
     });
     res.redirect("/diary/my");
   } catch (error) {
@@ -41,15 +47,16 @@ const getDiaryById = async (req, res) => {
   try {
     const data = await Diary.findByPk(req.params.id, {
       raw: true,
-      plain: true, 
-      include: ["comment"],
+      plain: true,
+      include: ["comment", 'user'],
       nest: true,
     });
     const diary = await data.toJSON();
     res.render("diary/one-diary", {
       title: "Diary",
       diaries: diary.reverse(),
-      comments: diary.comment.reverse()
+      comments: diary.comment.reverse(),
+      isAuthenticated: req.session.isLogged,
     });
   } catch (error) {
     console.log(error);
