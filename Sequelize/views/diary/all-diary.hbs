@@ -1,0 +1,57 @@
+<div class="container">
+  <div class="row">
+    <div class="col-mod-6 offset">
+      {{#if diaries.length}}
+        {{#each diaries}}
+          <div class="card mb-5 mt-5">
+            <div class="card-body">
+              <div class="list-group mb-1">
+                <a href="" class="list-group-item list-group-item-action">
+                  <img src="" alt="" />
+                  <h5 class="card-title">{{user.name}}</h5>
+                </a>
+              </div>
+              <p class="card-text"> {{text}} </p>
+              <p class="card-text"><small class="text-muted">
+                  {{createdAt}}
+                </small></p>
+            </div>
+            {{#if imageUrl}}
+              <img src="{{imageUrl}}" />
+            {{/if}}
+            <div class="card-footer">
+              <a
+                href="/diary/{{id}}"
+                type="button"
+                class="btn btn-success"
+              >Open</a>
+            </div>
+          </div>
+        {{/each}}
+        <ul class="pagination pagination-lg justify-content-center">
+          {{#if currentPageAndPrevPageNotEqualOne}}
+            <li class="page-item" aria-current="page">
+              <a class="page-link" href="/diary/all?page=1">1</a>
+            </li>
+          {{/if}}
+          {{#if hasPrev}}
+            <li class="page-item"><a class="page-link"
+                href="/diary/all?page={{previousPage}}">{{previousPage}}</a></li>
+          {{/if}}
+          <li class="page-item active"><a class="page-link "
+              href="/diary/all?page={{currentPage}}"> {{currentPage}} </a></li>
+          {{#if hasNext}}
+            <li class="page-item"><a class="page-link"
+                href="/diary/all?page={{nextPage}}">{{nextPage}}</a></li>
+          {{/if}}
+          {{#if lastPageChecking}}
+            <li class="page-item"><a class="page-link"
+                href="/diary/all?page={{lastPage}}">{{lastPage}}</a></li>
+          {{/if}}
+        </ul>
+      {{else}}
+        <h1>No diary added yet.</h1>
+      {{/if}}
+    </div>
+  </div>
+</div>

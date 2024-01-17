@@ -1,10 +1,6 @@
-const { Sequelize } = require("sequelize");
 const db = require("../models/index");
-const sequelize = new Sequelize();
-const User = sequelize.define();
-User.update();
-// const User = db.user;
-// const Diary = db.diary;
+const User = db.user;
+const Diary = db.diary;
 
 //Desc   get user profile
 //Route  GET /user/profile/:id
@@ -32,7 +28,6 @@ const getUserProfile = async (req, res) => {
 //Desc   get my profile
 //Route  GET /user/profile/my
 //Access private
-
 const getMyProfile = async (req, res) => {
   const user = req.session.user;
   try {
