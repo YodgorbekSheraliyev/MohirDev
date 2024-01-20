@@ -7,9 +7,22 @@ const ErrorResponse = require("../utils/errorResponse");
 // @route  GET api/v1/planets
 // @access Public / wih apiKey
 exports.getAllPlanets = asyncHandler(async (req, res, next) => {
-  const planets = await Planet.find();
+  const pageLimit = process.env.DEFAULT_PAGE_LIMIT || 5;
+  const page = parseInt(req.query.page || 1);
+  const limit = parseInt(req.query.limit || pageLimit);
+  const total = await Planet.countDocuments();
 
-  res.status(200).json({ success: true, data: planets });
+  const planets = await Planet.find()
+    .skip((page - 1) * limit)
+    .limit(limit);
+
+  res.status(200).json({
+    success: true,
+    pageCount: Math.ceil(total / limit),
+    currentPage: page,
+    nextPage: Math.ceil(total/limit) < page +1 ? null : page + 1,
+    data: planets,
+  });
 });
 
 // @desc   Get planet by id
@@ -75,7 +88,9 @@ exports.updatePlanet = asyncHandler(async (req, res, next) => {
 // @route  DELETE api/v1/planets/:id
 // @access Private/Admin
 exports.deletePlanet = asyncHandler(async (req, res, next) => {
-    await Planet.findByIdAndDelete(req.params.id)
+  await Planet.findByIdAndDelete(req.params.id);
 
-    res.status(200).json({success: true, message: 'Planet deleted successfully'})
-})
+  res
+    .status(200)
+    .json({ success: true, message: "Planet deleted successfully" });
+});
