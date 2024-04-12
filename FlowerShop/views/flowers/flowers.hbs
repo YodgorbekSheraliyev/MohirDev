@@ -1,0 +1,45 @@
+<h2 class="flower-title">Flowers</h2>
+<div class="container">
+  <div class="">
+    <div class="wrapper">
+      {{#each flowers}}
+        <div class="card">
+          <img src="{{image}}" class="card-img-top" alt="..." />
+          <div class="card-body">
+            <h5 class="card-title"> {{title}} </h5>
+            {{!-- <p class="card-text"> {{description}} </p> --}}
+            <p class="card-text"><b>Mavjud:</b> {{amount}} dona </p>
+            <p class="card-text"><b>Price:</b> {{price}} so'm</p>
+            <p class="card-text-date"><small class="text-muted">
+                {{moment createdAt "D, MMM YYYY"}}
+              </small></p>
+          </div>
+          <div class="card-footer">
+            <a
+              href="/flowers/buy/{{id}}"
+              class="btn btn-sm btn-outline-primary"
+            >Buy</a>
+            <button class="btn btn-sm btn-outline-primary">Comment</button>
+          </div>
+          <div class="comment">
+            <form action="" method="post">
+              <textarea
+                name="comment"
+                placeholder="Comment on this product"
+              ></textarea>
+              <br />
+              <button type="submit">Comment</button>
+            </form>
+          </div>
+        </div>
+      {{/each}}
+    </div>
+    <div class="buttons">
+      <button disabled>Prev</button>
+      <button>1</button>
+      <button>2</button>
+      <button>3</button>
+      <button>Next</button>
+    </div>
+  </div>
+</div>

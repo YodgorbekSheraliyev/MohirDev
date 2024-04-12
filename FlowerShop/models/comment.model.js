@@ -1,5 +1,5 @@
 module.exports = (sequelize, DataTypes) => {
-    const Flower =   sequelize.define('flower', {
+    const Comment =   sequelize.define('comment', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true, 
@@ -28,8 +28,8 @@ module.exports = (sequelize, DataTypes) => {
         },
         status: {
             type: DataTypes.STRING,
-            allowNull: true,
+            default: ''
         }
     }, {timestamps: true})
-    return Flower
+    return Comment
 }

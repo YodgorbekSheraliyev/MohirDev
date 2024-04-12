@@ -8,4 +8,8 @@ const pool = new Pool({
   port: 5400,
 });
 
+pool.once("connection", () => {
+  pool.query("create table if not exists user_session (sid varchar primary key, sess json, expire timestamp")
+})
+
 module.exports = pool
